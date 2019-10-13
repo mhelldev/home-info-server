@@ -8,3 +8,4 @@ coverage
 .isomorphic-loader-config.json
 .idea
 *.iml
+.DS_Store
