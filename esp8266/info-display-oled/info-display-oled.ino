@@ -367,7 +367,7 @@ void drawWasteDateScreen(String type, String dateSimple, String day) {
   display2.drawString(5, 0, type);
   display2.setFont(ArialMT_Plain_16);
   display2.drawString(5, 25, dateSimple);
-  display2.drawString(5, 35, day);
+  display2.drawString(5, 38, day);
   display2.drawXbm(80, 10, Trash_width, Trash_height, Trash_bits);
   display2.drawVerticalLine(127, 0, 64);
 
