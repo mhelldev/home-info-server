@@ -107,7 +107,7 @@ void loop() {
       handleWasteDate();      
       handleMarkets();      
   }
-  delay(10000);
+  delay(30000);
 }
 
 void handleWeatherData() {
