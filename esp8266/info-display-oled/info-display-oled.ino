@@ -8,8 +8,10 @@
 #include <ArduinoJson.h>
  
 // Initialize the OLED display using Wire library
-SSD1306Wire  display(0x3c, D2, D1);  //D2=SDK  D1=SCK  As per labeling on NodeMCU
+SSD1306Wire  display1(0x3c, D2, D1);  //D2=SDK  D1=SCK  As per labeling on NodeMCU
 SSD1306Wire  display2(0x3c, D4, D3);  //D2=SDK  D1=SCK  As per labeling on NodeMCU
+SSD1306Wire  display3(0x3c, D6, D5);  //D2=SDK  D1=SCK  As per labeling on NodeMCU
+
 ESP8266WiFiMulti WiFiMulti;
 
 #define USE_SERIAL Serial
@@ -83,19 +85,23 @@ void setup() {
   USE_SERIAL.println("Initializing OLED Display");
   USE_SERIAL.println("-------------------------");
   
-  display.init();
+  display1.init();
   display2.init();
+  display3.init();
   
   // This will make sure that multiple instances of a display driver
   // running on different ports will work together transparently
-  display.setI2cAutoInit(true);
+  display1.setI2cAutoInit(true);
   display2.setI2cAutoInit(true);
+  display3.setI2cAutoInit(true);
   
-  display.flipScreenVertically();
+  display1.flipScreenVertically();
   display2.flipScreenVertically();
+  display3.flipScreenVertically();
   
-  display.setFont(ArialMT_Plain_10);
+  display1.setFont(ArialMT_Plain_10);
   display2.setFont(ArialMT_Plain_10);
+  display3.setFont(ArialMT_Plain_10);
   
   drawLoadingScreen();
   USE_SERIAL.println("-------------------------");
@@ -117,10 +123,10 @@ void loop() {
       handleWasteDate();
       delay(10000);
       handleTrainConnections();
-      delay(10000);
-      handleMarkets();
-      delay(10000);
-      handleRssFeed();
+      //delay(10000);
+      //handleMarkets();
+      //delay(10000);
+      //handleRssFeed();
   }
   delay(10000);
 }
@@ -197,20 +203,20 @@ void handleTrainConnections() {
           deserializeJson(doc, payload);
           //JsonObject trainConnections = doc.as<JsonObject>();                            
           JsonArray array = doc.as<JsonArray>();
-          display.clear();
+          display3.clear();
           int i = 0;
           for(JsonObject connection : array) {
               String line = connection[String("line")];
               String destination = connection[String("destination")];
               String minutes = connection[String("minutes")];
-              display.setTextAlignment(TEXT_ALIGN_LEFT);
-              display.setFont(ArialMT_Plain_10);
-              display.drawString(5, 0 + i * 15, line);
-              display.drawString(25, 0 + i * 15, destination);
-              display.drawString(100, 0 + i * 15, minutes);
+              display3.setTextAlignment(TEXT_ALIGN_LEFT);
+              display3.setFont(ArialMT_Plain_10);
+              display3.drawString(5, 0 + i * 15, line);
+              display3.drawString(25, 0 + i * 15, destination);
+              display3.drawString(100, 0 + i * 15, minutes);
               i++;
           }
-          display.display();
+          display3.display();
       }
   } else {
       USE_SERIAL.printf("[HTTP] GET... failed, error: %s\n", http.errorToString(httpCode).c_str());
@@ -236,18 +242,18 @@ void handleMarkets() {
           DynamicJsonDocument doc(1024);
           deserializeJson(doc, payload);
           JsonArray array = doc.as<JsonArray>();
-          display.clear();
+          display3.clear();
           int i = 0;
           for(JsonObject connection : array) {
               String location = connection[String("location")];
               String date = connection[String("date")];
-              display.setTextAlignment(TEXT_ALIGN_LEFT);
-              display.setFont(ArialMT_Plain_10);
-              display.drawString(5, 0 + i * 15, date);
-              display.drawString(25, 0 + i * 15, location);
+              display3.setTextAlignment(TEXT_ALIGN_LEFT);
+              display3.setFont(ArialMT_Plain_10);
+              display3.drawString(5, 0 + i * 15, date);
+              display3.drawString(25, 0 + i * 15, location);
               i++;
           }
-          display.display();
+          display3.display();
       }
   } else {
       USE_SERIAL.printf("[HTTP] GET... failed, error: %s\n", http.errorToString(httpCode).c_str());
@@ -282,12 +288,12 @@ void handleRssFeed() {
 }
 
 void drawLoadingScreen() {
-  display.clear();
-  display.setTextAlignment(TEXT_ALIGN_LEFT);
-  display.setFont(ArialMT_Plain_16);
-  display.drawString(0, 20, "connecting");
-  display.drawString(0, 40,  "to server...");
-  display.display();
+  display1.clear();
+  display1.setTextAlignment(TEXT_ALIGN_LEFT);
+  display1.setFont(ArialMT_Plain_16);
+  display1.drawString(0, 20, "connecting");
+  display1.drawString(0, 40,  "to server...");
+  display1.display();
 
   display2.clear();
   display2.setTextAlignment(TEXT_ALIGN_LEFT);
@@ -296,53 +302,60 @@ void drawLoadingScreen() {
   display2.drawString(0, 40,  "to server...");
   display2.drawVerticalLine(127, 0, 64);
   display2.display();
+
+  display3.clear();
+  display3.setTextAlignment(TEXT_ALIGN_LEFT);
+  display3.setFont(ArialMT_Plain_16);
+  display3.drawString(0, 20, "connecting");
+  display3.drawString(0, 40,  "to server...");
+  display3.display();
 }
 
 void drawWeatherScreen(String name, String temp, String code, String date, 
                        String feelslike, String windspeed, String humidity) {   
-  display.clear();
+  display2.clear();
   if (code == "31" || code == "32") {
-    display.drawXbm(0, 0, Clear_width, Clear_height, Clear_bits);
+    display2.drawXbm(0, 0, Clear_width, Clear_height, Clear_bits);
   } else if (code == "10" || code == "11" || code == "12"){
-    display.drawXbm(0, 0, Rain_width, Rain_height, Rain_bits);
+    display2.drawXbm(0, 0, Rain_width, Rain_height, Rain_bits);
   } else {
-    display.drawXbm(0, 0, Cloudy_width, Cloudy_height, Cloudy_bits);
+    display2.drawXbm(0, 0, Cloudy_width, Cloudy_height, Cloudy_bits);
   }
-  display.setTextAlignment(TEXT_ALIGN_LEFT);
-  display.setFont(ArialMT_Plain_24);
-  display.drawString(0, 40, temp);
+  display2.setTextAlignment(TEXT_ALIGN_LEFT);
+  display2.setFont(ArialMT_Plain_24);
+  display2.drawString(0, 40, temp);
 
-  display.setFont(ArialMT_Plain_16);
-  display.drawString(55, 0, date);
-  display.drawString(55, 16, feelslike);
-  display.drawString(55, 32, windspeed);
-  display.drawString(55, 48, humidity);
+  display2.setFont(ArialMT_Plain_16);
+  display2.drawString(55, 0, date);
+  display2.drawString(55, 16, feelslike);
+  display2.drawString(55, 32, windspeed);
+  display2.drawString(55, 48, humidity);
   
-  display.display();
+  display2.display();
 }
 
 
 void drawWasteDateScreen(String type, String dateSimple, String day) {   
-  display2.clear();
-  display2.setTextAlignment(TEXT_ALIGN_LEFT);
-  display2.setFont(ArialMT_Plain_24);
-  display2.drawString(5, 0, type);
-  display2.setFont(ArialMT_Plain_16);
-  display2.drawString(5, 25, dateSimple);
-  display2.drawString(5, 42, day);
-  display2.drawXbm(80, 10, Trash_width, Trash_height, Trash_bits);
-  display2.drawVerticalLine(127, 0, 64);
+  display1.clear();
+  display1.setTextAlignment(TEXT_ALIGN_LEFT);
+  display1.setFont(ArialMT_Plain_24);
+  display1.drawString(5, 0, type);
+  display1.setFont(ArialMT_Plain_16);
+  display1.drawString(5, 25, dateSimple);
+  display1.drawString(5, 42, day);
+  display1.drawXbm(80, 10, Trash_width, Trash_height, Trash_bits);
+  display1.drawVerticalLine(127, 0, 64);
 
-  display2.display();
+  display1.display();
 }
 
 void drawRssScreen(String title, String date) {
-  display.clear();
-  display.setTextAlignment(TEXT_ALIGN_LEFT);
-  display.setFont(ArialMT_Plain_16);
-  display.drawString(5, 0, date);
-  display.setFont(ArialMT_Plain_10);
-  display.drawString(5, 30, title);
+  display1.clear();
+  display1.setTextAlignment(TEXT_ALIGN_LEFT);
+  display1.setFont(ArialMT_Plain_16);
+  display1.drawString(5, 0, date);
+  display1.setFont(ArialMT_Plain_10);
+  display1.drawString(5, 30, title);
 
-  display.display();
+  display1.display();
 }
