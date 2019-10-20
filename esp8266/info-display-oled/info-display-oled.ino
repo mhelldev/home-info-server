@@ -298,6 +298,6 @@ void drawWasteDateScreen(String type, String dateSimple, String day) {
   display3.setFont(ArialMT_Plain_16);
   display3.drawString(5, 25, dateSimple);
   display3.drawString(5, 42, day);
-  display3.drawVerticalLine(40, 0, 64);
+  display3.drawVerticalLine(45, 0, 64);
   display3.display();
 }
