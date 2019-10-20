@@ -149,7 +149,7 @@ void handleWeatherData() {
           DynamicJsonDocument doc(1024);
           deserializeJson(doc, payload);
           JsonObject weatherData = doc.as<JsonObject>();                            
-          drawWeatherScreen(weatherData[String("name")], weatherData[String("temp")], weatherData[String("code")],
+          drawWeatherScreen(weatherData[String("name")], weatherData[String("temp")], weatherData[String("tempTomorrow")], weatherData[String("code")],
           weatherData[String("date")], weatherData[String("feelslike")], weatherData[String("windspeed")], weatherData[String("humidity")]);
       }
   } else {
@@ -311,7 +311,7 @@ void drawLoadingScreen() {
   display3.display();
 }
 
-void drawWeatherScreen(String name, String temp, String code, String date, 
+void drawWeatherScreen(String name, String temp, String tempTomorrow, String code, String date, 
                        String feelslike, String windspeed, String humidity) {   
   display2.clear();
   if (code == "31" || code == "32") {
@@ -323,11 +323,12 @@ void drawWeatherScreen(String name, String temp, String code, String date,
   }
   display2.setTextAlignment(TEXT_ALIGN_LEFT);
   display2.setFont(ArialMT_Plain_24);
-  display2.drawString(0, 40, temp);
-
+  display2.drawString(0, 35, temp);
   display2.setFont(ArialMT_Plain_16);
+  display2.drawString(0, 45, feelslike);
+  
   display2.drawString(55, 0, date);
-  display2.drawString(55, 16, feelslike);
+  display2.drawString(55, 16, tempTomorrow);
   display2.drawString(55, 32, windspeed);
   display2.drawString(55, 48, humidity);
   

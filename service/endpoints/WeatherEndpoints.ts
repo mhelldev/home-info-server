@@ -6,6 +6,7 @@ import { Moment } from 'moment'
 
 interface Weather {
     temp: string
+    tempTomorrow: string
     name: string
     code: string
     date: string
@@ -33,6 +34,7 @@ export class WeatherEndpoints {
                 if(err) console.log(err);
                 let w: Weather = {
                     temp: "undefined",
+                    tempTomorrow: "undefined",
                     name: "undefined",
                     code: "undefined",
                     date: "undefined",
@@ -50,6 +52,7 @@ export class WeatherEndpoints {
 
                     w = {
                         temp: result[0].current.temperature + "°",
+                        tempTomorrow: result[0].forecast[2].shortday +": " + result[0].forecast[2].high + "°",
                         name: result[0].current.shortday,
                         code: result[0].current.skycode,
                         date: moment().utc(true).format('ddd DD.MM'),
