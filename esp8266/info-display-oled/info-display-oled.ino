@@ -310,7 +310,7 @@ void drawWeatherScreen(String name, String temp, String code, String date,
   }
   display.setTextAlignment(TEXT_ALIGN_LEFT);
   display.setFont(ArialMT_Plain_24);
-  display.drawString(5, 40, temp);
+  display.drawString(0, 40, temp);
 
   display.setFont(ArialMT_Plain_16);
   display.drawString(55, 0, date);
