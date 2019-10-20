@@ -323,10 +323,11 @@ void drawWeatherScreen(String name, String temp, String tempTomorrow, String cod
   }
   display2.setTextAlignment(TEXT_ALIGN_LEFT);
   display2.setFont(ArialMT_Plain_24);
-  display2.drawString(0, 35, temp);
+  display2.drawString(0, 32, temp);
+  display2.setFont(ArialMT_Plain_10);
+  display2.drawString(5, 54, feelslike);
+
   display2.setFont(ArialMT_Plain_16);
-  display2.drawString(0, 45, feelslike);
-  
   display2.drawString(55, 0, date);
   display2.drawString(55, 16, tempTomorrow);
   display2.drawString(55, 32, windspeed);
