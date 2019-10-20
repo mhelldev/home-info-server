@@ -1,6 +1,8 @@
 import { NextFunction, Request, Response } from 'express'
 import * as HttpStatus from 'http-status-codes'
 var weather = require('weather-js');
+var moment = require('moment')
+import { Moment } from 'moment'
 
 interface Weather {
     temp: string
@@ -50,7 +52,7 @@ export class WeatherEndpoints {
                         temp: result[0].current.temperature + "°",
                         name: result[0].current.shortday,
                         code: result[0].current.skycode,
-                        date: result[0].current.shortday + " " + date,
+                        date: moment().utc(true).format('ddd DD.MM'),
                         feelslike: result[0].current.feelslike + "°",
                         windspeed: wind,
                         humidity: result[0].current.humidity + "%",
