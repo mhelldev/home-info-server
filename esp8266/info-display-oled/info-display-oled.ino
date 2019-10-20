@@ -208,7 +208,7 @@ void handleWasteDate() {
           DynamicJsonDocument doc(1024);
           deserializeJson(doc, payload);
           JsonObject wasteDate = doc.as<JsonObject>();                            
-          drawWasteDateScreen(wasteDate[String("type")], wasteDate[String("dateSimple")]);
+          drawWasteDateScreen(wasteDate[String("type")], wasteDate[String("dateSimple")], wasteDate[String("day")]);
       }
   } else {
       USE_SERIAL.printf("[HTTP] GET... failed, error: %s\n", http.errorToString(httpCode).c_str());
@@ -360,13 +360,14 @@ void drawWeatherScreen(String name, String temp, String code, String date,
 }
 
 
-void drawWasteDateScreen(String type, String dateSimple) {   
+void drawWasteDateScreen(String type, String dateSimple, String day) {   
   display2.clear();
   display2.setTextAlignment(TEXT_ALIGN_LEFT);
   display2.setFont(ArialMT_Plain_24);
   display2.drawString(5, 0, type);
-  display2.drawString(5, 30, dateSimple);
-  display2.drawXbm(70, 10, Trash_width, Trash_height, Trash_bits);
+  display2.drawString(5, 25, dateSimple);
+  display2.drawString(5, 50, day);
+  display2.drawXbm(80, 10, Trash_width, Trash_height, Trash_bits);
   display2.drawVerticalLine(127, 0, 64);
 
   display2.display();

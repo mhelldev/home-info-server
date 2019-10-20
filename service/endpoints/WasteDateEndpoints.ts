@@ -3,12 +3,13 @@ const ical = require('node-ical');
 var moment = require('moment')
 import { Moment } from 'moment'
 
-type WasteType = 'Rest' | 'Gelb' | 'Bio'
+type WasteType = 'Rest' | 'Gelb' | 'Bio' | 'Papier'
 
 interface WasteDate {
     type: string
     date: Moment
     dateSimple: string
+    day: string
 }
 
 let  dates: WasteDate[] = []
@@ -33,10 +34,14 @@ export class WasteDateEndpoints {
                          if (type.indexOf('Rest') >= 0) {
                              type = 'Rest'
                          }
+                         if (type.indexOf('Altpapier') >= 0) {
+                             type = 'Papier'
+                         }
                          dates.push({
                              type,
                              date: moment(ev.start).utc(true),
-                             dateSimple: moment(ev.start).utc(true).format('DD.MM')
+                             dateSimple: moment(ev.start).utc(true).format('DD.MM'),
+                             day: moment(ev.start).utc(true).format('ddd'),
                          })
                      }
                  }
