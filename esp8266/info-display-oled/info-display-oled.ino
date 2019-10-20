@@ -119,14 +119,12 @@ void loop() {
   // wait for WiFi connection
   if((WiFiMulti.run() == WL_CONNECTED)) {
       handleWeatherData();
-      delay(10000);
-      handleWasteDate();
-      delay(10000);
       handleTrainConnections();
-      //delay(10000);
-      //handleMarkets();
-      //delay(10000);
-      //handleRssFeed();
+      handleWasteDate();      
+      delay(10000);
+      handleMarkets();
+      delay(10000);
+      handleRssFeed();
   }
   delay(10000);
 }
@@ -203,21 +201,21 @@ void handleTrainConnections() {
           deserializeJson(doc, payload);
           //JsonObject trainConnections = doc.as<JsonObject>();                            
           JsonArray array = doc.as<JsonArray>();
-          display3.clear();
+          display1.clear();
           int i = 0;
           for(JsonObject connection : array) {
               String line = connection[String("line")];
               String destination = connection[String("destination")];
               String minutes = connection[String("minutes")];
-              display3.setTextAlignment(TEXT_ALIGN_LEFT);
-              display3.setFont(ArialMT_Plain_10);
-              display3.drawString(5, 0 + i * 15, line);
-              display3.drawString(25, 0 + i * 15, destination);
-              display3.setTextAlignment(TEXT_ALIGN_RIGHT);
-              display3.drawString(120, 0 + i * 15, minutes);
+              display1.setTextAlignment(TEXT_ALIGN_LEFT);
+              display1.setFont(ArialMT_Plain_10);
+              display1.drawString(5, 0 + i * 15, line);
+              display1.drawString(25, 0 + i * 15, destination);
+              display1.setTextAlignment(TEXT_ALIGN_RIGHT);
+              display1.drawString(120, 0 + i * 15, minutes);
               i++;
           }
-          display3.display();
+          display1.display();
       }
   } else {
       USE_SERIAL.printf("[HTTP] GET... failed, error: %s\n", http.errorToString(httpCode).c_str());
@@ -338,25 +336,25 @@ void drawWeatherScreen(String name, String temp, String tempTomorrow, String cod
 
 
 void drawWasteDateScreen(String type, String dateSimple, String day) {   
-  display1.clear();
-  display1.setTextAlignment(TEXT_ALIGN_LEFT);
-  display1.setFont(ArialMT_Plain_24);
-  display1.drawString(5, 0, type);
-  display1.setFont(ArialMT_Plain_16);
-  display1.drawString(5, 25, dateSimple);
-  display1.drawString(5, 42, day);
-  display1.drawXbm(80, 10, Trash_width, Trash_height, Trash_bits);
+  display3.clear();
+  display3.setTextAlignment(TEXT_ALIGN_LEFT);
+  display3.setFont(ArialMT_Plain_24);
+  display3.drawString(5, 0, type);
+  display3.setFont(ArialMT_Plain_16);
+  display3.drawString(5, 25, dateSimple);
+  display3.drawString(5, 42, day);
+  display3.drawXbm(80, 10, Trash_width, Trash_height, Trash_bits);
 
-  display1.display();
+  display3.display();
 }
 
 void drawRssScreen(String title, String date) {
-  display1.clear();
-  display1.setTextAlignment(TEXT_ALIGN_LEFT);
-  display1.setFont(ArialMT_Plain_16);
-  display1.drawString(5, 0, date);
-  display1.setFont(ArialMT_Plain_10);
-  display1.drawString(5, 30, title);
+  display3.clear();
+  display3.setTextAlignment(TEXT_ALIGN_LEFT);
+  display3.setFont(ArialMT_Plain_16);
+  display3.drawString(5, 0, date);
+  display3.setFont(ArialMT_Plain_10);
+  display3.drawString(5, 30, title);
 
-  display1.display();
+  display3.display();
 }

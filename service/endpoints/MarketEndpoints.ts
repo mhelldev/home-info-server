@@ -12,16 +12,16 @@ export class MarketEndpoints {
         try {
             let markets: Market[] = [
                 {
-                    location: 'Radschägermarkt',
-                    date: '2019.10.13'
+                    location: 'Messe',
+                    date: '3.11'
                 },
                 {
-                    location: 'Radschlägermarkt',
-                    date: '2019.11.10'
+                    location: 'Radschläger',
+                    date: '10.11'
                 },
                 {
-                    location: 'Radschlägermarkt',
-                    date: '2019.12.08'
+                    location: 'Radschläger',
+                    date: '08.12'
                 }]
             res.json(markets)
         } catch (err) {
