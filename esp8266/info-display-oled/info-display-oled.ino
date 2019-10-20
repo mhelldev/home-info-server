@@ -213,7 +213,8 @@ void handleTrainConnections() {
               display3.setFont(ArialMT_Plain_10);
               display3.drawString(5, 0 + i * 15, line);
               display3.drawString(25, 0 + i * 15, destination);
-              display3.drawString(100, 0 + i * 15, minutes);
+              display3.setTextAlignment(TEXT_ALIGN_RIGHT);
+              display3.drawString(120, 0 + i * 15, minutes);
               i++;
           }
           display3.display();
@@ -344,7 +345,6 @@ void drawWasteDateScreen(String type, String dateSimple, String day) {
   display1.drawString(5, 25, dateSimple);
   display1.drawString(5, 42, day);
   display1.drawXbm(80, 10, Trash_width, Trash_height, Trash_bits);
-  display1.drawVerticalLine(127, 0, 64);
 
   display1.display();
 }

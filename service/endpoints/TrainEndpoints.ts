@@ -23,10 +23,14 @@ export class TrainEndpoints {
                     resp.on('end', () => {
                         data = JSON.parse(data).preformatted.forEach(
                             (entry:any) => {
+                                let destination = entry[1].toString()
+                                if (destination.length > 12) {
+                                    destination = destination.substring(0, 10) + '...'
+                                }
                                 responseData.push(
                                     {
                                         line: entry[0],
-                                        destination: entry[1],
+                                        destination: destination,
                                         minutes: entry[2]
                                     })
                             }
