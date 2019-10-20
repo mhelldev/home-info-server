@@ -301,7 +301,6 @@ void drawLoadingScreen() {
   display2.setFont(ArialMT_Plain_16);
   display2.drawString(0, 20, "connecting");
   display2.drawString(0, 40,  "to server...");
-  display2.drawVerticalLine(127, 0, 64);
   display2.display();
 
   display3.clear();
