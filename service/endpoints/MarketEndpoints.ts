@@ -18,10 +18,6 @@ export class MarketEndpoints {
                 {
                     location: 'Radschläger',
                     date: '10.11'
-                },
-                {
-                    location: 'Radschläger',
-                    date: '08.12'
                 }]
             res.json(markets)
         } catch (err) {

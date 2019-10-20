@@ -60,22 +60,6 @@ static unsigned char Rain_bits[] = {
   0xF0, 0x01, 0xE0, 0x03, 0xF0, 0x01, 0xE0, 0x01, 0xF0, 0x80, 0xE1, 0x01,
   0xF0, 0xC0, 0x01, 0x00, 0x00, 0xE0, 0x01, 0x00, 0x00, 0xF0, 0x01, 0x00,
   0x00, 0xF0, 0x01, 0x00, 0x00, 0xE0, 0x00, 0x00};
-
-#define Trash_width 32
-#define Trash_height 32
-static unsigned char Trash_bits[] = {
-  0x00, 0x00, 0x01, 0x00, 0x00, 0x84, 0x07, 0x00, 0x00, 0x9C, 0x1F, 0x00,
-  0x00, 0xFE, 0x38, 0x00, 0x00, 0xFC, 0xF1, 0x00, 0x00, 0xF8, 0x63, 0x00,
-  0x00, 0xE0, 0x7F, 0x00, 0x00, 0x80, 0x3F, 0x00, 0x00, 0x00, 0xFE, 0x00,
-  0x00, 0x00, 0xFC, 0x01, 0x00, 0x00, 0xF0, 0x01, 0x00, 0x00, 0xC0, 0x00,
-  0x00, 0x00, 0x00, 0x00, 0x80, 0xFF, 0xFF, 0x00, 0x80, 0xFF, 0x7F, 0x00,
-  0x80, 0xFF, 0xFF, 0x00, 0x80, 0xFB, 0xF7, 0x00, 0x80, 0x3F, 0xF7, 0x00,
-  0x80, 0x7B, 0x77, 0x00, 0x80, 0xFB, 0xF7, 0x00, 0x80, 0x7B, 0xF7, 0x00,
-  0x80, 0x7B, 0x77, 0x00, 0x80, 0xFF, 0xF7, 0x00, 0x80, 0x3B, 0xF7, 0x00,
-  0x80, 0x7B, 0x77, 0x00, 0x80, 0xFF, 0xF7, 0x00, 0x80, 0x7B, 0xF7, 0x00,
-  0x80, 0x7B, 0x77, 0x00, 0x80, 0x7B, 0xF7, 0x00, 0x80, 0xFF, 0xFF, 0x00,
-  0x80, 0xFF, 0x7F, 0x00, 0x80, 0xFF, 0xFF, 0x00
-};
  
 void setup() {
   delay(1000);
@@ -121,10 +105,7 @@ void loop() {
       handleWeatherData();
       handleTrainConnections();
       handleWasteDate();      
-      delay(10000);
-      handleMarkets();
-      delay(10000);
-      handleRssFeed();
+      handleMarkets();      
   }
   delay(10000);
 }
@@ -241,45 +222,18 @@ void handleMarkets() {
           DynamicJsonDocument doc(1024);
           deserializeJson(doc, payload);
           JsonArray array = doc.as<JsonArray>();
-          display3.clear();
+
           int i = 0;
           for(JsonObject connection : array) {
               String location = connection[String("location")];
               String date = connection[String("date")];
-              display3.setTextAlignment(TEXT_ALIGN_LEFT);
-              display3.setFont(ArialMT_Plain_10);
-              display3.drawString(0, 0 + i * 15, date);
-              display3.setTextAlignment(TEXT_ALIGN_RIGHT);
-              display3.drawString(120, 0 + i * 15, location);
+               display3.setTextAlignment(TEXT_ALIGN_RIGHT);
+              display3.setFont(ArialMT_Plain_10);                           
+              display3.drawString(120 , 0 + i * 15, location);
+              display3.drawString(120, 15 + i * 15, date);
               i++;
           }
           display3.display();
-      }
-  } else {
-      USE_SERIAL.printf("[HTTP] GET... failed, error: %s\n", http.errorToString(httpCode).c_str());
-  }
-  http.end();
-}
-
-void handleRssFeed() {
-  HTTPClient http;
-  USE_SERIAL.print("[HTTP] begin...\n");        
-  http.begin("http://homeinfoserver.herokuapp.com/api/rss"); //HTTP
-  http.addHeader("Content-Type", "application/json");
-  USE_SERIAL.print("[HTTP] GET...\n");
-  int httpCode = http.GET();
-  String payload = http.getString();
-  // httpCode will be negative on error
-  if(httpCode > 0) {
-      // HTTP header has been send and Server response header has been handled
-      USE_SERIAL.printf("[HTTP] GET... code: %d\n", httpCode);
-      // file found at server
-      if(httpCode == HTTP_CODE_OK) {
-          USE_SERIAL.println(payload);
-          DynamicJsonDocument doc(1024);
-          deserializeJson(doc, payload);
-          JsonObject rss = doc.as<JsonObject>();                            
-          drawRssScreen(rss[String("title")], rss[String("date")]);
       }
   } else {
       USE_SERIAL.printf("[HTTP] GET... failed, error: %s\n", http.errorToString(httpCode).c_str());
@@ -344,18 +298,6 @@ void drawWasteDateScreen(String type, String dateSimple, String day) {
   display3.setFont(ArialMT_Plain_16);
   display3.drawString(5, 25, dateSimple);
   display3.drawString(5, 42, day);
-  display3.drawXbm(80, 10, Trash_width, Trash_height, Trash_bits);
-
-  display3.display();
-}
-
-void drawRssScreen(String title, String date) {
-  display3.clear();
-  display3.setTextAlignment(TEXT_ALIGN_LEFT);
-  display3.setFont(ArialMT_Plain_16);
-  display3.drawString(5, 0, date);
-  display3.setFont(ArialMT_Plain_10);
-  display3.drawString(5, 30, title);
-
+  display3.drawVerticalLine(40, 0, 64);
   display3.display();
 }
