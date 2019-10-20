@@ -248,8 +248,9 @@ void handleMarkets() {
               String date = connection[String("date")];
               display3.setTextAlignment(TEXT_ALIGN_LEFT);
               display3.setFont(ArialMT_Plain_10);
-              display3.drawString(5, 0 + i * 15, date);
-              display3.drawString(25, 0 + i * 15, location);
+              display3.drawString(0, 0 + i * 15, date);
+              display3.setTextAlignment(TEXT_ALIGN_RIGHT);
+              display3.drawString(120, 0 + i * 15, location);
               i++;
           }
           display3.display();

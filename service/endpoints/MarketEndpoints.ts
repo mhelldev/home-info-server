@@ -13,7 +13,7 @@ export class MarketEndpoints {
             let markets: Market[] = [
                 {
                     location: 'Messe',
-                    date: '3.11'
+                    date: '03.11'
                 },
                 {
                     location: 'Radschläger',
