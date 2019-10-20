@@ -222,7 +222,7 @@ void handleMarkets() {
           DynamicJsonDocument doc(1024);
           deserializeJson(doc, payload);
           JsonArray array = doc.as<JsonArray>();
-
+          // clear missing here because waste dates have been displayed before
           int i = 0;
           for(JsonObject connection : array) {
               String location = connection[String("location")];
@@ -231,7 +231,7 @@ void handleMarkets() {
               display3.setFont(ArialMT_Plain_10);                           
               display3.drawString(120 , 0 + i * 15, location);
               display3.drawString(120, 15 + i * 15, date);
-              i++;
+              i+=2;
           }
           display3.display();
       }
@@ -298,6 +298,6 @@ void drawWasteDateScreen(String type, String dateSimple, String day) {
   display3.setFont(ArialMT_Plain_16);
   display3.drawString(5, 25, dateSimple);
   display3.drawString(5, 42, day);
-  display3.drawVerticalLine(45, 0, 64);
-  display3.display();
+  display3.drawVerticalLine(50, 0, 64);
+  // display() missing here because markets will be displayed after
 }
