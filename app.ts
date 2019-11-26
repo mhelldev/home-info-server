@@ -6,6 +6,7 @@ import {MarketEndpoints} from "./service/endpoints/MarketEndpoints";
 
 let express = require('express')
 let cors = require('cors');
+var path = require('path');
 let port = process.env.PORT || 3000
 let app = express()
 let weatherEndpoints = new WeatherEndpoints()
@@ -17,7 +18,7 @@ let marketEndpoints = new MarketEndpoints()
 app.use(cors());
 
 app.get('/', function (req: any, res: any) {
-    res.send(JSON.stringify({ Hello: 'Home Info Server'}))
+    res.sendFile(path.join(__dirname + '/index.html'));
 })
 app.listen(port, function () {
     console.log('Example app listening on port !')

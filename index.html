@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Temp:</title>
+    <div id="temp" />
+</head>
+<body>
+<h1>Dokument mit integriertem JavaScript</h1>
+<script>
+
+    function createNode(element) {
+        return document.createElement(element);
+    }
+
+    function append(parent, el) {
+        return parent.appendChild(el);
+    }
+
+    const divTemp = document.getElementById('temp');
+    const url = 'https://homeinfoserver.herokuapp.com/api/weather';
+    fetch(url)
+        .then((resp) => resp.json())
+        .then(function(data) {
+            let temp = data.temp
+            let  span = createNode('span');
+            span.innerHTML = temp;
+            append(divTemp, span);
+
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
+</script>
+</body>
+</html>
