@@ -57,8 +57,8 @@
     fetch(url)
         .then(function(resp){return resp.json()})
         .then(function(data) {
-            let temp = data.temp
-            let  pTemp = createNode('p');
+            var temp = data.temp
+            var  pTemp = createNode('p');
             pTemp.innerHTML = temp;
             append(divTemp, pTemp);
 
