@@ -55,7 +55,7 @@
     const divTemp = document.getElementById("Weather");
     const url = 'https://homeinfoserver.herokuapp.com/api/weather';
     fetch(url)
-        .then((resp) => resp.json())
+        .then(function(resp){return resp.json()})
         .then(function(data) {
             let temp = data.temp
             let  pTemp = createNode('p');
