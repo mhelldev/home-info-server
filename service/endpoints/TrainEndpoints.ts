@@ -9,9 +9,8 @@ interface TrainConnection {
 }
 export class TrainEndpoints {
 
-    public getTrainConnections = async (req: Request, res: Response, next: NextFunction) => {
-        console.log('train connections requested...')
-        try {
+    public getTrainConnectionsData():Promise<TrainConnection[]> {
+        return new Promise((resolve,reject)  => {
             let data = ''
             let responseData: TrainConnection[] = []
             https.get('https://vrrf.finalrewind.org/D%C3%BCsseldorf/Eckenerstra%C3%9Fe.json?frontend=json&no_lines=4',
@@ -35,12 +34,19 @@ export class TrainEndpoints {
                                     })
                             }
                         )
-                        res.json(responseData)
+                        resolve(responseData)
                     })
 
                 }).on('error', (err: any) => {
-                next(err)
+                    console.error(err)
             })
+        })
+    }
+
+    public getTrainConnections = async (req: Request, res: Response, next: NextFunction) => {
+        console.log('train connections requested...')
+        try {
+            res.json(await this.getTrainConnectionsData())
         } catch (err) {
             next(err)
         }

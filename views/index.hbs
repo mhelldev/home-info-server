@@ -31,19 +31,23 @@
         .Info-block {
             border-right: 1px solid white;
             padding: 20px;
+            height: 220px;
         }
 
         .Small {
             font-size: smaller;
             color: gray;
         }
+        .Icon {
+            font-size: xx-large;
+        }
     </style>
     <title>HomeInfoServer</title>
 </head>
 <body>
     <div class="App">
-
         <div class="Info-block">
+            <div class="Icon">☁️</div>
             <div><b>{{weather.date}}</b></div>
             <div><b>{{weather.temp}}</b></div>
             <div class="Small">{{weather.feelslike}}</div>
@@ -52,10 +56,24 @@
             <div class="Small">📈{{weather.tempTomorrow}}</div>
         </div>
         <div class="Info-block">
-            <div>🗑️</div>
+            <div class="Icon">🗑️</div>
             <div><b>{{waste.type}}</b></div>
             <div>{{waste.dateSimple}}</div>
             <div>{{waste.day}}</div>
+        </div>
+        <div class="Info-block">
+            <div class="Icon">🚂️</div>
+            {{#each trains}}
+                <div>{{line}} {{destination}} {{minutes}}</div>
+            {{/each}}
+
+        </div>
+        <div class="Info-block">
+            <div class="Icon">🛍️</div>
+            {{#each markets}}
+                <div>{{location}} {{date}}</div>
+            {{/each}}
+
         </div>
     </div>
 </body>

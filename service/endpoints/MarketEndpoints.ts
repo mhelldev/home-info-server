@@ -7,19 +7,25 @@ interface Market {
 }
 export class MarketEndpoints {
 
+    public getMarketsData(): Promise<Market[]> {
+        return new Promise(resolve => {
+            let markets: Market[] = [
+                {
+                    location: 'Radschläger',
+                    date: '08.12'
+                },
+                {
+                    location: 'Kindertrödel JAB',
+                    date: '14.12'
+                }]
+            resolve(markets)
+        })
+
+    }
     public getMarkets = async (req: Request, res: Response, next: NextFunction) => {
         console.log('market dates requested...')
         try {
-            let markets: Market[] = [
-                {
-                    location: 'Messe',
-                    date: '03.11'
-                },
-                {
-                    location: 'Radschläger',
-                    date: '10.11'
-                }]
-            res.json(markets)
+            res.json(await this.getMarketsData())
         } catch (err) {
             next(err)
         }

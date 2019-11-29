@@ -27,7 +27,9 @@ app.listen(port, function () {
 app.get('/', async (req: any, res: any) => {
     const weather = await weatherEndpoints.getWeatherData()
     const waste = await wasteDateEndpoints.getNextDateData()
-    res.render('index', {weather, waste})
+    const trains = await trainEndpoints.getTrainConnectionsData()
+    const markets = await marketEndpoints.getMarketsData()
+    res.render('index', {weather, waste, trains, markets})
 })
 
 app.get('/api/weather/', weatherEndpoints.getWeather)
