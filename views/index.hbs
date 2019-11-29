@@ -11,6 +11,7 @@
             sans-serif;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            background-color: #282c34;
         }
 
         code {
@@ -19,11 +20,11 @@
         }
 
         .App {
+            margin-top: 50px;
             text-align: center;
-            background-color: #282c34;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: row;
+            vertical-align: center;
+            #min-height: 100vh;
+            display: grid;
             align-items: center;
             justify-content: center;
             font-size: calc(10px + 2vmin);
@@ -31,9 +32,22 @@
         }
 
         .Info-block {
-            border-right: 1px solid white;
+            border-bottom: 1px solid white;
+        }
+
+        .Item {
             padding: 20px;
-            height: 220px;
+            float: left;
+        }
+        .Full {
+            padding: 20px;
+            width: 90%;
+            text-align: left;
+        }
+
+        .Right {
+            text-align: right;
+            float: right;
         }
 
         .Small {
@@ -49,33 +63,33 @@
 <body>
     <div class="App">
         <div class="Info-block">
-            <div class="Icon">☁️</div>
-            <div><b>{{weather.date}}</b></div>
-            <div><b>{{weather.temp}}</b></div>
-            <div class="Small">{{weather.feelslike}}</div>
-            <div>{{weather.humidity}}</div>
-            <div>{{weather.windspeed}}</div>
-            <div class="Small">📈{{weather.tempTomorrow}}</div>
+            <div class="Item Icon">☁️</div>
+            <div class="Item"><b>{{weather.date}}</b></div>
+            <div class="Item"><b>{{weather.temp}}</b></div>
+            <div class="Item Small">{{weather.feelslike}}</div>
+            <div class="Item">{{weather.humidity}}</div>
+            <div class="Item">{{weather.windspeed}}</div>
+            <div class="Item Small">{{weather.tempTomorrow}}</div>
         </div>
         <div class="Info-block">
-            <div class="Icon">🗑️</div>
-            <div><b>{{waste.type}}</b></div>
-            <div>{{waste.dateSimple}}</div>
-            <div>{{waste.day}}</div>
+            <div class="Item Icon">🗑️</div>
+            <div class="Item"><b>{{waste.type}}</b></div>
+            <div class="Item">{{waste.dateSimple}}</div>
+            <div class="Item">{{waste.day}}</div>
         </div>
         <div class="Info-block">
-            <div class="Icon">🚂️</div>
+            <div class="Full">
             {{#each trains}}
-                <div>{{line}} {{destination}} {{minutes}}</div>
+                <div>{{line}} {{destination}} <div class="Right">{{minutes}}</div></div>
             {{/each}}
-
+            </div>
         </div>
         <div class="Info-block">
-            <div class="Icon">🛍️</div>
+            <div class="Full">
             {{#each markets}}
-                <div>{{location}} {{date}}</div>
+                <div>{{location}} <div class="Right">{{date}}</div></div>
             {{/each}}
-
+            </div>
         </div>
     </div>
 </body>
