@@ -63,7 +63,7 @@ export class WasteDateEndpoints {
     public getNextDate = async (req: Request, res: Response, next: NextFunction) => {
         console.log('waste date requested...')
         try {
-            res.json(this.getNextDateData())
+            res.json(await this.getNextDateData())
         } catch (err) {
             next(err)
         }
