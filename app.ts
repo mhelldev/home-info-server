@@ -25,9 +25,9 @@ app.listen(port, function () {
 })
 
 app.get('/', async (req: any, res: any) => {
-    const weather = await weatherEndpoints.getWeatherData();
-    console.log(weather)
-    res.render('index', {weather})
+    const weather = await weatherEndpoints.getWeatherData()
+    const waste = await wasteDateEndpoints.getNextDateData()
+    res.render('index', {weather, waste})
 })
 
 app.get('/api/weather/', weatherEndpoints.getWeather)

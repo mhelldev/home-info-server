@@ -44,9 +44,18 @@
     <div class="App">
 
         <div class="Info-block">
+            <div><b>{{weather.date}}</b></div>
             <div>{{weather.temp}}</div>
             <div class="Small">{{weather.feelslike}}</div>
-
+            <div>{{weather.humidity}}</div>
+            <div>{{weather.windspeed}}</div>
+            <div class="Small">📈{{weather.tempTomorrow}}</div>
+        </div>
+        <div class="Info-block">
+            <div>🗑️</div>
+            <div>{{waste.type}}</div>
+            <div>{{waste.dateSimple}}</div>
+            <div>{{waste.day}}</div>
         </div>
     </div>
 </body>
