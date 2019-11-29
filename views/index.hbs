@@ -78,18 +78,20 @@
             <div class="Item">{{waste.day}}</div>
         </div>
         <div class="Info-block">
+
             <div class="Full">
             {{#each trains}}
-                <div>{{line}} {{destination}} <div class="Right">{{minutes}}</div></div>
+                <div><b>{{line}}</b> &nbsp;&nbsp;{{destination}} <div class="Right">{{minutes}}</div></div>
             {{/each}}
             </div>
         </div>
         <div class="Info-block">
+            <div class="Item Icon">🛍️</div>
             <div class="Full">
             {{#each markets}}
                 <div>{{location}} <div class="Right">{{date}}</div></div>
             {{/each}}
-            </div>
+            <div/>
         </div>
     </div>
 </body>
