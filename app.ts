@@ -17,11 +17,16 @@ let marketEndpoints = new MarketEndpoints()
 
 app.use(cors());
 
-app.get('/', function (req: any, res: any) {
-    res.sendFile(path.join(__dirname + '/index.html'));
-})
+app.set('views',path.join(__dirname,'views'))
+app.set('view engine','hbs')
+
 app.listen(port, function () {
     console.log('Example app listening on port !')
+})
+
+app.get('/', async (req: any, res: any) => {
+    console.log(await weatherEndpoints.getWeatherData())
+    res.render('index')
 })
 
 app.get('/api/weather/', weatherEndpoints.getWeather)
