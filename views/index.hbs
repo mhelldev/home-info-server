@@ -21,6 +21,11 @@
             float: left;
             font-size: 40px;
         }
+        .Small {
+            float: left;
+            font-size: 16px;
+            color: gray;
+        }
     </style>
 </head>
 <body>
@@ -28,9 +33,8 @@
     <ul class="list-group list-group-flush">
         <li class="list-group-item">
             <div class="Icon">☁️</div>
-            <div class="Item"><b>{{weather.date}}</b></div>
             <div class="Item"><b>{{weather.temp}}</b></div>
-            <div class="Item Small">{{weather.feelslike}}</div>
+            <div class="Small">{{weather.feelslike}}</div>
             <div class="Item">{{weather.humidity}}</div>
             <div class="Item">{{weather.windspeed}}</div>
             <div class="Item Small">{{weather.tempTomorrow}}</div>
