@@ -18,6 +18,7 @@
             font-size: 20px;
         }
         .Icon {
+            float: left;
             font-size: 40px;
         }
     </style>
@@ -26,7 +27,7 @@
     <h1 style="text-align: right">{{dateAndTime}}</h1>
     <ul class="list-group list-group-flush">
         <li class="list-group-item">
-            <div class="Item Icon">☁️</div>
+            <div class="Icon">☁️</div>
             <div class="Item"><b>{{weather.date}}</b></div>
             <div class="Item"><b>{{weather.temp}}</b></div>
             <div class="Item Small">{{weather.feelslike}}</div>
@@ -35,26 +36,26 @@
             <div class="Item Small">{{weather.tempTomorrow}}</div>
         </li>
         <li class="list-group-item">
-            <div class="Item Icon">🗑️</div>
+            <div class="Icon">🗑️</div>
             <div class="Item"><b>{{waste.type}}</b></div>
             <div class="Item">{{waste.dateSimple}}</div>
             <div class="Item">{{waste.day}}</div>
         </li>
         <li class="list-group-item">
-            <div class="Item Icon">🚆️</div>
+            <div class="Icon">🚆️</div>
             {{#each trains}}
                 <div class="Item-Small"><b>{{line}}</b> &nbsp;&nbsp;{{destination}} <div class="Right">{{minutes}}</div></div>
             {{/each}}
         </li>
         <li class="list-group-item">
-            <div class="Item Icon">🛍️</div>
+            <div class="Icon">🛍️</div>
             {{#each markets}}
                 <div class="Item">{{location}}<div class="Right">{{date}}</div></div>
             {{/each}}
         </li>
         <li class="list-group-item">
-            <div class="Item Icon">📰️</div>
-            <div class="Item"><i>"{{rssFeed.title}}"</i></div>
+            <div class="Icon">📰️</div>
+            <div class="Item-Small"><i>"{{rssFeed.title}}"</i></div>
         </li>
     </ul>
 </body>
