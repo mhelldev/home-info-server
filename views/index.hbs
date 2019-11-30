@@ -3,67 +3,21 @@
 <head>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <title>HomeInfoServer</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" >
     <style>
-        body {
-            margin: 0;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-            'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-            sans-serif;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            background-color: #282c34;
-        }
-
-        code {
-            font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-            monospace;
-        }
-
-        .App {
-            margin-top: 50px;
-            text-align: center;
-            vertical-align: center;
-            #min-height: 100vh;
-            display: grid;
-            align-items: center;
-            justify-content: center;
-            font-size: calc(10px + 2vmin);
-            color: white;
-        }
-
-        .Info-block {
-            border-bottom: 1px solid white;
-            width: 900px;
-        }
-
         .Item {
-            padding: 20px;
-            float: left;
-        }
-        .Full {
-            padding: 20px;
-            width: 90%;
-            text-align: left;
-        }
-
-        .Right {
-            text-align: right;
-            float: right;
-        }
-
-        .Small {
-            font-size: smaller;
-            color: gray;
+            float:left;
+            margin: 20px;
         }
         .Icon {
-            font-size: xx-large;
+            font-size: 30px;
         }
     </style>
-    <title>HomeInfoServer</title>
 </head>
 <body>
-    <div class="App">
-        <div class="Info-block">
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">
             <div class="Item Icon">☁️</div>
             <div class="Item"><b>{{weather.date}}</b></div>
             <div class="Item"><b>{{weather.temp}}</b></div>
@@ -71,29 +25,25 @@
             <div class="Item">{{weather.humidity}}</div>
             <div class="Item">{{weather.windspeed}}</div>
             <div class="Item Small">{{weather.tempTomorrow}}</div>
-        </div>
-        <div class="Info-block">
+        </li>
+        <li class="list-group-item">
             <div class="Item Icon">🗑️</div>
             <div class="Item"><b>{{waste.type}}</b></div>
             <div class="Item">{{waste.dateSimple}}</div>
             <div class="Item">{{waste.day}}</div>
-        </div>
-        <div class="Info-block">
-
-            <div class="Full">
+        </li>
+        <li class="list-group-item">
+            <div class="Item Icon">🚆️</div>
             {{#each trains}}
-                <div><b>{{line}}</b> &nbsp;&nbsp;{{destination}} <div class="Right">{{minutes}}</div></div>
+                <div class="Item"><b>{{line}}</b> &nbsp;&nbsp;{{destination}} <div class="Right">{{minutes}}</div></div>
             {{/each}}
-            </div>
-        </div>
-        <div class="Info-block">
+        </li>
+        <li class="list-group-item">
             <div class="Item Icon">🛍️</div>
-            <div class="Full">
             {{#each markets}}
-                <div>{{location}} <div class="Right">{{date}}</div></div>
+                <div class="Item">{{location}}<div class="Right">{{date}}</div></div>
             {{/each}}
-            <div/>
-        </div>
-    </div>
+        </li>
+    </ul>
 </body>
 </html>
