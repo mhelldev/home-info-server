@@ -31,7 +31,19 @@ app.get('/', async (req: any, res: any) => {
     const waste = await wasteDateEndpoints.getNextDateData()
     const trains = await trainEndpoints.getTrainConnectionsData()
     const markets = await marketEndpoints.getMarketsData()
-    res.render('index', {weather, waste, trains, markets})
+    const rssFeed = await rssEndpoints.getRssFeedData()
+
+    const date_ob = new Date();
+    let date = ("0" + date_ob.getDate()).slice(-2);
+    let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+    let year = date_ob.getFullYear();
+    let hours = date_ob.getHours();
+    let minutes = date_ob.getMinutes();
+    let seconds = date_ob.getSeconds();
+    // prints date & time in YYYY-MM-DD HH:MM:SS format
+    let dateAndTime = date + "." + month + "." + year + " " + hours + ":" + minutes
+
+    res.render('index', {weather, waste, trains, markets, rssFeed, dateAndTime})
 })
 
 app.get('/api/weather/', weatherEndpoints.getWeather)

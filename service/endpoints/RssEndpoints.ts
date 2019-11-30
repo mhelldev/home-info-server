@@ -8,9 +8,8 @@ interface RssFeed {
 }
 export class RssEndpoints {
 
-    public getRssFeed = async (req: Request, res: Response, next: NextFunction) => {
-        console.log('rss feed requested...')
-        try {
+    public getRssFeedData(): Promise<RssFeed> {
+        return new Promise<RssFeed>(async resolve => {
             let parser = new Parser();
             let feed = await parser.parseURL('https://www.spiegel.de/schlagzeilen/eilmeldungen/index.rss');
             let latest: RssFeed = {
@@ -23,7 +22,14 @@ export class RssEndpoints {
                     date: feed.items[0].pubDate
                 }
             }
-            res.json(latest)
+            resolve(latest)
+        })
+    }
+
+    public getRssFeed = async (req: Request, res: Response, next: NextFunction) => {
+        console.log('rss feed requested...')
+        try {
+            res.json(this.getRssFeedData())
 
         } catch (err) {
             next(err)

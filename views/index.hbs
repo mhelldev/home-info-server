@@ -3,6 +3,7 @@
 <head>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta http-equiv="refresh" content="30" >
     <title>HomeInfoServer</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css" >
     <style>
@@ -16,6 +17,7 @@
     </style>
 </head>
 <body>
+    <h1 style="text-align: right">{{dateAndTime}}</h1>
     <ul class="list-group list-group-flush">
         <li class="list-group-item">
             <div class="Item Icon">☁️</div>
@@ -43,6 +45,10 @@
             {{#each markets}}
                 <div class="Item">{{location}}<div class="Right">{{date}}</div></div>
             {{/each}}
+        </li>
+        <li class="list-group-item">
+            <div class="Item Icon">📰️</div>
+            <div class="Item"><i>"{{rssFeed.title}}"</i></div>
         </li>
     </ul>
 </body>
