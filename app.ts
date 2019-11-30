@@ -34,14 +34,7 @@ app.get('/', async (req: any, res: any) => {
     const rssFeed = await rssEndpoints.getRssFeedData()
 
     const date_ob = new Date()
-    let date = ("0" + date_ob.getDate()).slice(-2);
-    let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
-    let year = date_ob.getFullYear();
-    let hours = date_ob.getUTCHours();
-    let minutes = date_ob.getMinutes();
-    let seconds = date_ob.getSeconds();
-    // prints date & time in YYYY-MM-DD HH:MM:SS format
-    let dateAndTime = date + "." + month + "." + year + " " + hours + ":" + minutes
+    let dateAndTime = date_ob.toLocaleDateString('de-DE')
 
     res.render('index', {weather, waste, trains, markets, rssFeed, dateAndTime})
 })
