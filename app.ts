@@ -15,13 +15,28 @@ let trainEndpoints = new TrainEndpoints()
 let rssEndpoints = new RssEndpoints()
 let marketEndpoints = new MarketEndpoints()
 
-app.use(cors());
 
-app.get('/', function (req: any, res: any) {
-    res.sendFile(path.join(__dirname + '/index.html'));
-})
+app.use(cors())
+app.use(express.static(path.join(__dirname, '/public')))
+
+app.set('views',path.join(__dirname,'views'))
+app.set('view engine','hbs')
+
 app.listen(port, function () {
     console.log('Example app listening on port !')
+})
+
+app.get('/', async (req: any, res: any) => {
+    const weather = await weatherEndpoints.getWeatherData()
+    const waste = await wasteDateEndpoints.getNextDateData()
+    const trains = await trainEndpoints.getTrainConnectionsData()
+    const markets = await marketEndpoints.getMarketsData()
+    const rssFeed = await rssEndpoints.getRssFeedData()
+
+    const date_ob = new Date()
+    let dateAndTime = date_ob.toLocaleDateString('de-DE')
+
+    res.render('index', {weather, waste, trains, markets, rssFeed, dateAndTime})
 })
 
 app.get('/api/weather/', weatherEndpoints.getWeather)

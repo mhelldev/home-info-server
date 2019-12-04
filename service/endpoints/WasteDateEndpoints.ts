@@ -49,15 +49,21 @@ export class WasteDateEndpoints {
          });
     }
 
-    public getNextDate = async (req: Request, res: Response, next: NextFunction) => {
-        console.log('waste date requested...')
-        try {
+    public getNextDateData(): Promise<WasteDate> {
+        return new Promise<WasteDate>(resolve => {
             dates.sort((a: WasteDate ,b:WasteDate) => {
                 return a.date.diff(b.date)
             })
-            res.json(dates.filter((d) => {
+            resolve(dates.filter((d) => {
                 return d.date.isAfter(moment().utc(true))
             })[0])
+        })
+    }
+
+    public getNextDate = async (req: Request, res: Response, next: NextFunction) => {
+        console.log('waste date requested...')
+        try {
+            res.json(await this.getNextDateData())
         } catch (err) {
             next(err)
         }

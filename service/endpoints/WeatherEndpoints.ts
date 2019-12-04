@@ -26,12 +26,12 @@ export class WeatherEndpoints {
         }
     }
 
-    public getWeather = async (req: Request, res: Response, next: NextFunction) => {
-        console.log('weather data requested...')
-        try {
-            let result
-            await weather.find({search: 'Düsseldorf, Germany', degreeType: 'C'}, (err: any, result: any) => {
-                if(err) console.log(err);
+    public getWeatherData(): Promise<Weather>{
+        return new Promise((resolve, reject ) => {
+            weather.find({search: 'Düsseldorf, Germany', degreeType: 'C'}, (err: any, result: any) => {
+                if(err) {
+                    console.log(err);
+                }
                 let w: Weather = {
                     temp: "undefined",
                     tempTomorrow: "undefined",
@@ -61,9 +61,16 @@ export class WeatherEndpoints {
                         humidity: result[0].current.humidity + "%",
                     }
                 }
+                console.log('weather resolved...')
+                resolve(w)
+            })
+        });
+    }
 
-                res.json(w)
-            });
+    public getWeather = async (req: Request, res: Response, next: NextFunction) => {
+        console.log('weather data requested...')
+        try {
+            res.json(await this.getWeatherData())
 
         } catch (err) {
             next(err)
