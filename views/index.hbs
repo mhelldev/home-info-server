@@ -9,7 +9,7 @@
     <style>
         .Item {
             float:left;
-            margin: 20px;
+            margin: 5px 20px 5px 20px;
             font-size: 30px;
         }
         .Item-Small {
@@ -24,6 +24,7 @@
         .Small {
             color: gray;
         }
+
     </style>
 </head>
 <body>
@@ -46,13 +47,13 @@
         <li class="list-group-item">
             <div class="Icon">🚆️</div>
             {{#each trains}}
-                <div class="Item-Small"><b>{{line}}</b> &nbsp;&nbsp;{{destination}} <div class="Right">{{minutes}}</div></div>
+                <div class="Item-Small"><b>{{line}} &nbsp;&nbsp;{{destination}}</b> <div class="Right Small" style="font-size: smaller">{{minutes}}</div></div>
             {{/each}}
         </li>
         <li class="list-group-item">
             <div class="Icon">🛍️</div>
             {{#each markets}}
-                <div class="Item">{{location}}<div class="Right">{{date}}</div></div>
+                <div class="Item-Small"><b>{{location}}</b><div class="Right">{{date}}</div></div>
             {{/each}}
         </li>
         <li class="list-group-item">

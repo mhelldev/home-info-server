@@ -13,7 +13,7 @@ export class TrainEndpoints {
         return new Promise((resolve,reject)  => {
             let data = ''
             let responseData: TrainConnection[] = []
-            https.get('https://vrrf.finalrewind.org/D%C3%BCsseldorf/Eckenerstra%C3%9Fe.json?frontend=json&no_lines=4',
+            https.get('https://vrrf.finalrewind.org/D%C3%BCsseldorf/Eckenerstra%C3%9Fe.json?frontend=json&no_lines=8',
                 (resp: any) => {
 
                     resp.on('data', (chunk: any) => {

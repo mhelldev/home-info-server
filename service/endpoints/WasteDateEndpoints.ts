@@ -41,7 +41,7 @@ export class WasteDateEndpoints {
                              type,
                              date: moment(ev.start).utc(true),
                              dateSimple: moment(ev.start).utc(true).format('DD.MM'),
-                             day: moment(ev.start).utc(true).format('ddd'),
+                             day: moment(ev.start).locale("de").utc(true).format('dd'),
                          })
                      }
                  }

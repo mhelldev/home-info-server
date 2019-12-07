@@ -55,7 +55,7 @@ export class WeatherEndpoints {
                         tempTomorrow: result[0].forecast[2].shortday +": " + result[0].forecast[2].high + "°",
                         name: result[0].current.shortday,
                         code: result[0].current.skycode,
-                        date: moment().utc(true).format('ddd DD.MM'),
+                        date: moment().locale("de").utc(true).format('dd DD.MM'),
                         feelslike: result[0].current.feelslike + "°",
                         windspeed: wind,
                         humidity: result[0].current.humidity + "%",
