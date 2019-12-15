@@ -3,6 +3,7 @@ import {WasteDateEndpoints} from "./service/endpoints/WasteDateEndpoints";
 import {TrainEndpoints} from "./service/endpoints/TrainEndpoints";
 import {RssEndpoints} from "./service/endpoints/RssEndpoints";
 import {MarketEndpoints} from "./service/endpoints/MarketEndpoints";
+var moment = require('moment')
 
 let express = require('express')
 let cors = require('cors');
@@ -34,9 +35,11 @@ app.get('/', async (req: any, res: any) => {
     const rssFeed = await rssEndpoints.getRssFeedData()
 
     const date_ob = new Date()
-    let dateAndTime = date_ob.toLocaleDateString('de-DE')
+    const date = moment().locale("de").utc(true).format('DD.MM.YYYY')
+    const time = moment().locale("de").utc(true).format('hh:mm')
 
-    res.render('index', {weather, waste, trains, markets, rssFeed, dateAndTime})
+
+    res.render('index', {weather, waste, trains, markets, rssFeed, date, time})
 })
 
 app.get('/api/weather/', weatherEndpoints.getWeather)

@@ -7,6 +7,9 @@
     <title>HomeInfoServer</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css" >
     <style>
+        h1 {
+            margin: 0px 20px 0px 20px
+        }
         .Item {
             float:left;
             margin: 5px 20px 5px 20px;
@@ -28,7 +31,8 @@
     </style>
 </head>
 <body>
-    <h1 style="text-align: right">{{dateAndTime}}</h1>
+    <h1 style="text-align: left; float: right">{{time}}</h1>
+    <h1 style="text-align: left">{{date}}</h1>
     <ul class="list-group list-group-flush">
         <li class="list-group-item">
             <div class="Icon">☁️</div>
