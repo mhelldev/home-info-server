@@ -36,7 +36,7 @@ app.get('/', async (req: any, res: any) => {
 
     const date_ob = new Date()
     const date = moment().locale("de").utc(true).format('DD.MM.YYYY')
-    const time = moment().locale("de").utc(true).format('hh:mm')
+    const time = moment().locale("de").format('hh:mm')
 
 
     res.render('index', {weather, waste, trains, markets, rssFeed, date, time})
