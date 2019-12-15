@@ -11,7 +11,7 @@ export class RssEndpoints {
     public getRssFeedData(): Promise<RssFeed> {
         return new Promise<RssFeed>(async resolve => {
             let parser = new Parser();
-            let feed = await parser.parseURL('https://www.spiegel.de/schlagzeilen/index.rss');
+            let feed = await parser.parseURL('https://www.spiegel.de/schlagzeilen/tops/index.rss');
             let latest: RssFeed = {
                 title: 'undefined',
                 date: 'undefined'
