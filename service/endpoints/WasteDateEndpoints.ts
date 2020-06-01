@@ -10,6 +10,7 @@ interface WasteDate {
     date: Moment
     dateSimple: string
     day: string
+    color: string
 }
 
 let  dates: WasteDate[] = []
@@ -25,20 +26,26 @@ export class WasteDateEndpoints {
                      var ev = data[k];
                      if (data[k].type == 'VEVENT') {
                          let type = ev.summary
+                         let color = ''
                          if (type.indexOf('Bio') >= 0) {
                              type = 'Bio'
+                             color = 'brown'
                          }
                          if (type.indexOf('Leicht') >= 0) {
                              type = 'Gelb'
+                             color = 'yellow'
                          }
                          if (type.indexOf('Rest') >= 0) {
                              type = 'Rest'
+                             color = 'gray'
                          }
                          if (type.indexOf('Altpapier') >= 0) {
                              type = 'Papier'
+                             color = '#1f76b0'
                          }
                          dates.push({
                              type,
+                             color,
                              date: moment(ev.start).utc(true),
                              dateSimple: moment(ev.start).utc(true).format('DD.MM'),
                              day: moment(ev.start).locale("de").utc(true).format('dd'),

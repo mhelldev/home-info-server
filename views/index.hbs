@@ -10,21 +10,21 @@
         h1 {
             margin: 0px 20px 0px 20px
         }
-        .Item {
+        .item {
             float:left;
             margin: 5px 20px 5px 20px;
             font-size: 30px;
         }
-        .Item-Small {
+        .item-small {
             float:left;
             margin: 20px;
             font-size: 20px;
         }
-        .Icon {
+        .icon {
             float: left;
             font-size: 40px;
         }
-        .Small {
+        .small {
             color: gray;
         }
 
@@ -35,23 +35,23 @@
     <h1 style="text-align: left">{{date}}</h1>
     <ul class="list-group list-group-flush">
         <li class="list-group-item">
-            <div class="Icon">☁️</div>
-            <div class="Item"><b>{{weather.temp}}</b></div>
-            <div class="Item Small">{{weather.tempMax}}</div>
-            <div class="Item">{{weather.humidity}}</div>
-            <div class="Item">{{weather.windspeed}}</div>
-            <div class="Item Small">{{weather.tempTomorrow}}</div>
+            <div class="icon">☁️</div>
+            <div class="item"><b>{{weather.temp}}</b></div>
+            <div class="item small">{{weather.tempMax}}</div>
+            <div class="item">{{weather.humidity}}</div>
+            <div class="item">{{weather.windspeed}}</div>
+            <div class="item small">{{weather.tempTomorrow}}</div>
+        </li>
+        <li class="list-group-item" style="background-color: {{waste.color}}">
+            <div class="icon">🗑️</div>
+            <div class="item"><b>{{waste.type}}</b></div>
+            <div class="item">{{waste.dateSimple}}</div>
+            <div class="item">{{waste.day}}</div>
         </li>
         <li class="list-group-item">
-            <div class="Icon">🗑️</div>
-            <div class="Item"><b>{{waste.type}}</b></div>
-            <div class="Item">{{waste.dateSimple}}</div>
-            <div class="Item">{{waste.day}}</div>
-        </li>
-        <li class="list-group-item">
-            <div class="Icon">🚆️</div>
+            <div class="icon">🚆️</div>
             {{#each trains}}
-                <div class="Item-Small"><b>{{line}} &nbsp;&nbsp;{{destination}}</b> <div class="Right Small" style="font-size: smaller">{{minutes}}</div></div>
+                <div class="item-small"><b>{{line}} &nbsp;&nbsp;{{destination}}</b> <div class="Right small" style="font-size: smaller">{{minutes}}</div></div>
             {{/each}}
         </li>
         <!--<li class="list-group-item">
@@ -61,8 +61,8 @@
             {{/each}}
         </li>-->
         <li class="list-group-item">
-            <div class="Icon">📰️</div>
-            <div class="Item-Small"><i>"{{rssFeed.title}}"</i></div>
+            <div class="icon">📰️</div>
+            <div class="item-small"><i>"{{rssFeed.title}}"</i></div>
         </li>
     </ul>
 </body>
