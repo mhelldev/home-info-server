@@ -29,15 +29,15 @@ export class WasteDateEndpoints {
                          let color = ''
                          if (type.indexOf('Bio') >= 0) {
                              type = 'Bio'
-                             color = 'brown'
+                             color = '#b0591f'
                          }
                          if (type.indexOf('Leicht') >= 0) {
                              type = 'Gelb'
-                             color = 'yellow'
+                             color = '#e6e600'
                          }
                          if (type.indexOf('Rest') >= 0) {
                              type = 'Rest'
-                             color = 'gray'
+                             color = '#9a9a9a'
                          }
                          if (type.indexOf('Altpapier') >= 0) {
                              type = 'Papier'
