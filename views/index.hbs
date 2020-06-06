@@ -15,6 +15,9 @@
             margin: 5px 20px 5px 20px;
             font-size: 50px;
         }
+        .warning {
+            color: red;
+        }
         .item-small {
             float:left;
             margin: 20px;
@@ -46,9 +49,9 @@
         </li>
         <li class="list-group-item" style="background-color: {{waste.color}}">
             <div class="icon">🗑️</div>
-            <div class="item"><b>{{waste.type}}</b></div>
-            <div class="item">{{waste.dateSimple}}</div>
-            <div class="item">{{waste.day}}</div>
+            <div class="item {{#if waste.warning}}warning{{/if}}"><b>{{waste.type}}</b></div>
+            <div class="item {{#if waste.warning}}warning{{/if}}">{{waste.dateSimple}}</div>
+            <div class="item {{#if waste.warning}}warning{{/if}}">{{waste.day}}</div>
         </li>
         <li class="list-group-item">
             <div class="icon">🚆️</div>

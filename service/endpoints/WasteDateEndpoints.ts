@@ -11,6 +11,7 @@ interface WasteDate {
     dateSimple: string
     day: string
     color: string
+    warning: boolean
 }
 
 let  dates: WasteDate[] = []
@@ -27,6 +28,10 @@ export class WasteDateEndpoints {
                      if (data[k].type == 'VEVENT') {
                          let type = ev.summary
                          let color = ''
+                         let warning = false
+                         if (moment(ev.start).diff(moment(),'days') <= 1) {
+                             warning = true
+                         }
                          if (type.indexOf('Bio') >= 0) {
                              type = 'Bio'
                              color = '#b0591f'
@@ -44,6 +49,7 @@ export class WasteDateEndpoints {
                              color = '#1f76b0'
                          }
                          dates.push({
+                             warning,
                              type,
                              color,
                              date: moment(ev.start).utc(true),
