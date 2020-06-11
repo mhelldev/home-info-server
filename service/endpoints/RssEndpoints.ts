@@ -8,6 +8,8 @@ interface RssFeed {
 }
 export class RssEndpoints {
 
+    private feedIndex: number = 0
+
     public getRssFeedData(): Promise<RssFeed> {
         return new Promise<RssFeed>(async resolve => {
             let parser = new Parser();
@@ -16,11 +18,15 @@ export class RssEndpoints {
                 title: 'undefined',
                 date: 'undefined'
             }
-            if (feed && feed.items[0]) {
-                latest = {
-                    title: feed.items[0].title,
-                    date: feed.items[0].pubDate
+            if (feed) {
+                if (this.feedIndex > feed.items.length) {
+                    this.feedIndex = 0
                 }
+                latest = {
+                    title: feed.items[this.feedIndex].title,
+                    date: feed.items[this.feedIndex].pubDate
+                }
+                this.feedIndex++
             }
             resolve(latest)
         })
