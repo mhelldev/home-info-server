@@ -19,7 +19,7 @@ export class RssEndpoints {
                 date: 'undefined'
             }
             if (feed) {
-                if (this.feedIndex > feed.items.length) {
+                if (this.feedIndex >= feed.items.length) {
                     this.feedIndex = 0
                 }
                 latest = {
