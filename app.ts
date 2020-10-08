@@ -5,6 +5,7 @@ import {RssEndpoints} from "./service/endpoints/RssEndpoints";
 import {MarketEndpoints} from "./service/endpoints/MarketEndpoints";
 import {NextFunction, Request, Response} from "express";
 import * as HttpStatus from "http-status-codes";
+import {CovidEndpoints} from "./service/endpoints/CovidEndpoints";
 var moment = require('moment')
 
 let express = require('express')
@@ -17,6 +18,7 @@ let wasteDateEndpoints = new WasteDateEndpoints()
 let trainEndpoints = new TrainEndpoints()
 let rssEndpoints = new RssEndpoints()
 let marketEndpoints = new MarketEndpoints()
+let covidEndpoints = new CovidEndpoints()
 let mailsSend: number = 0
 
 
@@ -50,6 +52,7 @@ app.get('/api/waste/', wasteDateEndpoints.getNextDate)
 app.get('/api/train/', trainEndpoints.getTrainConnections)
 app.get('/api/rss/', rssEndpoints.getRssFeed)
 app.get('/api/market/', marketEndpoints.getMarkets)
+app.get('/api/covid/', covidEndpoints.getSevenVal)
 
 app.get('/api/mail', (req: Request, res: Response, next: NextFunction) => {
     mailsSend++
