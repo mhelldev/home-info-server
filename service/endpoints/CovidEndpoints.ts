@@ -34,10 +34,6 @@ export class CovidEndpoints {
                             kreis: object[7]
                         })
                     }
-                })  // do whatever you like with the objects
-                .then(() => {
-                    console.log("all done")
-                    resolve({sevenVal: '', kreis: ''})
                 })
         })
     }
