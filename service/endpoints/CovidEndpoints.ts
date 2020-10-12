@@ -28,10 +28,7 @@ export class CovidEndpoints {
                 .pipe(new StringStream())
                 .CSVParse()
                 .consume((object:any) => {
-                    console.log(object[7])
                     if (object[7] === 'Düsseldorf') {
-                        console.log(object[7])
-                        console.log(object[35])
                         resolve({
                             sevenVal: object[35],
                             kreis: object[7]
