@@ -24,17 +24,17 @@ export class CovidEndpoints {
     private parseCSV(): Promise<CovidValues> {
         return new Promise<CovidValues>(async resolve => {
 
-            request.get("https://pavelmayer.de/covid/risks/data.csv")
+            request.get("https://opendata.arcgis.com/datasets/917fc37a709542548cc3be077a786c17_0.csv")
                 .pipe(new StringStream())
                 .CSVParse()
                 .consume((object:any) => {
-
-                    if (object [1] === 'SK Düsseldorf') {
-                        console.log(object[1])
-                        console.log(object[16])
+                    console.log(object[7])
+                    if (object[7] === 'Düsseldorf') {
+                        console.log(object[7])
+                        console.log(object[35])
                         resolve({
-                            sevenVal: object[16],
-                            kreis: object[1]
+                            sevenVal: object[35],
+                            kreis: object[7]
                         })
                     }
                 })  // do whatever you like with the objects
