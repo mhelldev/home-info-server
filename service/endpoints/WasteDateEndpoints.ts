@@ -38,7 +38,7 @@ export class WasteDateEndpoints {
                          }
                          if (type.indexOf('Leicht') >= 0) {
                              type = 'Gelb'
-                             color = '#e6e600'
+                             color = '#f7d117'
                          }
                          if (type.indexOf('Rest') >= 0) {
                              type = 'Rest'
