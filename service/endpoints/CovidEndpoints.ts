@@ -30,7 +30,7 @@ export class CovidEndpoints {
                 .consume((object:any) => {
                     if (object[7] === 'Düsseldorf') {
                         resolve({
-                            sevenVal: object[37],
+                            sevenVal: object[35],
                             kreis: object[7]
                         })
                     }
