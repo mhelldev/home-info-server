@@ -20,7 +20,7 @@ export class WasteDateEndpoints {
 
     constructor() {
 
-         let data = ical.parseFile(__dirname + '/resources/DUS_Abfuhrtermine_Stand_20200525.ICS', (err: any, data: any[]) => {
+         let data = ical.parseFile(__dirname + '/resources/DUS_Abfuhrtermine_Stand_20201228.ICS', (err: any, data: any[]) => {
              if (err) console.log(err);
              for (let k in data) {
                  if (data.hasOwnProperty(k)) {
